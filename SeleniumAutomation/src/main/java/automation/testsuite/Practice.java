@@ -12,7 +12,7 @@ public class Practice {
         int []a = new int[n];
         int sum = 0;
         for (int i = 0; i < n; i++) {
-            System.out.println("Nhập phần tử mảng thứ: " + i + 1);
+            System.out.println("Nhập phần tử mảng thứ: " + (i + 1));
             a[i] = sc.nextInt();
             sum += a[i];
         }
