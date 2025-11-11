@@ -2,7 +2,6 @@ package automation.common;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class CommonBase {
     public static WebDriver driver;
@@ -11,6 +10,7 @@ public class CommonBase {
         ChromeDriver driver = new ChromeDriver();
         driver.get(URL);
         driver.manage().window().maximize();
+        // driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30)); tăng kích thước thời gian load
         return driver;
     }
 
