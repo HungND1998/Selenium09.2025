@@ -9,4 +9,5 @@ public class CT_PageURL {
     public static String CODESTART_URL = "https://codestar.vn/product-category/aws/";
     public static String GLOBALSQ_URL = "https://www.globalsqa.com/demo-site/select-dropdown-menu/";
     public static String RADIO_URL = "https://automationfc.github.io/basic-form/index.html";
+    public static String CRM_URL = "http://test-system.crmstar.vn/";
 }
