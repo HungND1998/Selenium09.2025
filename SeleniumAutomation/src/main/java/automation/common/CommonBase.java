@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.*;
 
 public class CommonBase {
@@ -17,7 +19,16 @@ public class CommonBase {
 
     public WebDriver initFirefoxDriver(String URL) {
         System.setProperty("webdriver.firefox.driver", System.getProperty("user.dir") + "\\driver\\geckodriver.exe");
-        FirefoxDriver driver = new FirefoxDriver();
+        FirefoxProfile profile = new FirefoxProfile();
+        profile.setPreference("network.cookie.cookieBehavior", 0);  // 0 = allow all cookies
+        profile.setPreference("permissions.default.cookie", 1);     // auto allow cookie permissions
+        profile.setPreference("permissions.default.desktop-notification", 1);
+        profile.setPreference("dom.popup_maximum", 0);
+
+        FirefoxOptions options = new FirefoxOptions();
+        options.setProfile(profile);
+
+        FirefoxDriver driver = new FirefoxDriver(options);
         driver.get(URL);
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(50));
@@ -93,6 +104,13 @@ public class CommonBase {
         } catch (Exception ex) {
             return false;
         }
+    }
+
+    //Scroll to element
+    public void scrollToElement(By locator) {
+        WebElement element = findElement_fluent(locator);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
     public void closeDriver() {
