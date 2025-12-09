@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestSuite">
+
+<!--	<test name="Test Day 12 and Day17 on firefox">-->
+<!--        <parameter name="browser" value="firefox"></parameter>-->
+<!--		<classes>-->
+<!--			<class name="automation.testsuite.Day12_Checkbox" />-->
+<!--			<class name="automation.testsuite.Day17_HandleIframe" />-->
+<!--		</classes>	-->
+<!--	</test>-->
+
+<!--    <test name="Test Day 12 and Day17 on chrome">-->
+<!--        <parameter name="browser" value="chrome"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="automation.testsuite.Day12_Checkbox" />-->
+<!--            <class name="automation.testsuite.Day17_HandleIframe" />-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="Test Day 12 and Day17 on edge">-->
+<!--        <parameter name="browser" value="edge"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="automation.testsuite.Day12_Checkbox" />-->
+<!--            <class name="automation.testsuite.Day17_HandleIframe" />-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="Test BTVN_DAY18_1 and BTVN_DAY18_2 on firefox">
+        <parameter name="browser" value="firefox"></parameter>
+        <classes>
+<!--            <class name="automation.testsuite.BTVN_DAY18_1" />-->
+            <class name="automation.testsuite.BTVN_DAY18_2" />
+        </classes>
+    </test>
+
+    <test name="Test BTVN_DAY18_1 and BTVN_DAY18_2 on chrome">
+        <parameter name="browser" value="chrome"></parameter>
+        <classes>
+<!--            <class name="automation.testsuite.BTVN_DAY18_1" />-->
+            <class name="automation.testsuite.BTVN_DAY18_2" />
+        </classes>
+    </test>
+
+</suite> <!-- Suite -->

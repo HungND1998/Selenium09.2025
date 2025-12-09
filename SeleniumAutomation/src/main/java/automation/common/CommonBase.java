@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -116,5 +117,73 @@ public class CommonBase {
     public void closeDriver() {
         if (driver != null)
             driver.close();
+    }
+
+    private WebDriver initFireFoxDriver() {
+            System.setProperty("webdriver.firefox.driver", System.getProperty("user.dir") + "\\driver\\geckodriver.exe");
+            FirefoxProfile profile = new FirefoxProfile();
+            profile.setPreference("network.cookie.cookieBehavior", 0);  // 0 = allow all cookies
+            profile.setPreference("permissions.default.cookie", 1);     // auto allow cookie permissions
+            profile.setPreference("permissions.default.desktop-notification", 1);
+            profile.setPreference("dom.popup_maximum", 0);
+            profile.setPreference("dom.disable_open_during_load", false);
+            profile.setPreference("browser.link.open_newwindow", 2);
+
+
+
+        FirefoxOptions options = new FirefoxOptions();
+            options.setProfile(profile);
+
+            FirefoxDriver driver = new FirefoxDriver(options);
+            driver.manage().window().maximize();
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(50));
+            return driver;
+    }
+
+    private WebDriver initChromeDriver() {
+        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\driver\\chromedriver.exe");
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--allow-third-party-cookies");
+        Map<String, Object> chromePrefs = new HashMap<>();
+        chromePrefs.put("credentials_enable_service", false); // Disables the "save password" prompt
+        chromePrefs.put("profile.password_manager_enabled", false); // Disables the password manager
+        chromePrefs.put("profile.password_manager_leak_detection", false); // Disables the password leak detection
+        // warning
+        chromeOptions.setExperimentalOption("prefs", chromePrefs);
+
+        ChromeDriver driver = new ChromeDriver(chromeOptions);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(50));
+        return driver;
+    }
+
+    private WebDriver initMSEdgeDriver() {
+        System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "\\driver\\msedgedriver.exe");
+        EdgeDriver driver = new EdgeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(50));
+        return driver;
+    }
+
+    public WebDriver setupDriver(String browserName) {
+        switch (browserName.trim().toLowerCase()) {
+            case "firefox":
+                System.out.println("Initializing firefox driver...");
+                driver = initFireFoxDriver();
+                break;
+            case "chrome":
+                System.out.println("Initializing chrome driver...");
+                driver = initChromeDriver();
+                break;
+            case "edge":
+                System.out.println("Initializing edge driver...");
+                driver = initMSEdgeDriver();
+                break;
+            default:
+                System.out.println("Initializing browser name, ");
+                driver = initChromeDriver();
+                break;
+        }
+        return driver;
     }
 }

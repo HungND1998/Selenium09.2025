@@ -5,18 +5,24 @@ import automation.contant.CT_PageURL;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class Day12_Checkbox extends CommonBase {
-
+    @BeforeMethod
+    @Parameters("browser") //browser là name của parameter trong testNG
+    public void openWebPage(@Optional("firefox") String browserSetup) {
+//        driver = initFirefoxDriver(CT_PageURL.CRM_URL);
+        setupDriver(browserSetup);
+        driver.get(CT_PageURL.DEMOQA_URL);
+    }
     @Test
     public void checkboxHandle() {
         //Case1: Kiểm tra giá trị mặc định theo yêu cầu requie,
         // vd vào trang web thì các checkbox chưa đc check
-        driver = initChromeDriver(CT_PageURL.DEMOQA_URL);
+//        driver = initChromeDriver(CT_PageURL.DEMOQA_URL);
         WebElement sportCheckbox = driver.findElement(By.id("hobbies-checkbox-1"));
         WebElement readCheckbox = driver.findElement(By.id("hobbies-checkbox-2"));
         WebElement musicCheckbox = driver.findElement(By.id("hobbies-checkbox-3"));
@@ -32,7 +38,6 @@ public class Day12_Checkbox extends CommonBase {
 
     @Test
     public void clickToCheckbox() {
-        driver = initChromeDriver(CT_PageURL.DEMOQA_URL);
         WebElement sportCheckbox = driver.findElement(By.id("hobbies-checkbox-1"));
         WebElement readCheckbox = driver.findElement(By.id("hobbies-checkbox-2"));
         WebElement musicCheckbox = driver.findElement(By.id("hobbies-checkbox-3"));
@@ -52,5 +57,10 @@ public class Day12_Checkbox extends CommonBase {
 //            musicCheckbox.click();
             assertTrue(musicCheckbox.isSelected());
         }
+    }
+
+    @AfterMethod
+    public void closeDriver() {
+        closeDriver();
     }
 }
